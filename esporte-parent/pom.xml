@@ -4,10 +4,9 @@
 
   <groupId>esporte</groupId>
   <artifactId>esporte-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
-  <description>elyx-parent</description>
-
+  <description>esporte-parent</description>
   <name>esporte-parent</name>
   <url>http://maven.apache.org</url>
 
@@ -23,11 +22,11 @@
   </properties>
 
   <modules>
+    <module>esporte-api</module>
   	<module>esporte-bl</module>
-  	<module>esporte-model</module>
   	<module>esporte-common</module>
   	<module>esporte-dao</module>
-  	<module>esporte-api</module>
+  	<module>esporte-model</module>
   </modules>
   
   <dependencies>

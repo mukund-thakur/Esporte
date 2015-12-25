@@ -4,7 +4,6 @@
 	xmlns:beans="http://www.springframework.org/schema/beans" 
 	xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:cache="http://www.springframework.org/schema/cache"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
               http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd

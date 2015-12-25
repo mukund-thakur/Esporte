@@ -5,7 +5,7 @@
   <parent>
     <groupId>esporte</groupId>
     <artifactId>esporte-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
   <groupId>esporte-dao</groupId>
   <artifactId>esporte-dao</artifactId>
@@ -22,5 +22,15 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+			<groupId>esporte-model</groupId>
+		  	<artifactId>esporte-model</artifactId>
+	  		<version>1.0.0</version>
+  	</dependency>
+  	<dependency>
+			<groupId>esporte-common</groupId>
+		  	<artifactId>esporte-common</artifactId>
+	  		<version>1.0.0</version>
+  		</dependency>
   </dependencies>
 </project>

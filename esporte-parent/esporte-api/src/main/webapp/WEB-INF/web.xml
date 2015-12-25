@@ -17,7 +17,8 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>  
            /WEB-INF/esporte-servlet.xml,
-			/WEB-INF/esporte-database-context.xml
+			/WEB-INF/esporte-database-context.xml,
+			/WEB-INF/esporte-hibernate-context.xml
         </param-value>
   </context-param>
   
