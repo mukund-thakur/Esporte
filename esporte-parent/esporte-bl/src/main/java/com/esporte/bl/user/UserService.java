@@ -2,6 +2,7 @@ package com.esporte.bl.user;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.esporte.common.utils.DateTimeUtil;
@@ -53,9 +54,12 @@ public class UserService {
 		Set<PhoneDetails> allPhoneDetails = new HashSet<PhoneDetails>();
 		allPhoneDetails.add(phoneDetails);
 		user.setPhoneDetails(allPhoneDetails);
-		user.setCreatedAt(DateTimeUtil.getCurrentDateTime());
-		user.setUpdatedAt(DateTimeUtil.getCurrentDateTime());
 		return userManager.create(user);
+	}
+
+	public User getUserByName(String userName) {
+		// TODO Auto-generated method stub
+		return userManager.getUserByName(userName);
 	}
 	
 
