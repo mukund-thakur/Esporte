@@ -7,11 +7,11 @@
     <artifactId>esporte-parent</artifactId>
     <version>1.0.0</version>
   </parent>
-  <groupId>esporte-api</groupId>
-  <artifactId>esporte-api</artifactId>
+  <groupId>esporte-test-api</groupId>
+  <artifactId>esporte-test-api</artifactId>
   <version>1.0.0</version>
   <packaging>war</packaging>
-  <name>esporte-api</name>
+  <name>esporte-test-api</name>
   <description>esporte-api</description>
   <url>http://maven.apache.org</url>
   <properties>
