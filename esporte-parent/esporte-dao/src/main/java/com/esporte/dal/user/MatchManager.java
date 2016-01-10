@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.esporte.model.user.Match;
-import com.esporte.model.user.UserTest;
+import com.esporte.model.user.TestUser;
 
 @Repository("matchManager")
 @Transactional(propagation = Propagation.REQUIRED)

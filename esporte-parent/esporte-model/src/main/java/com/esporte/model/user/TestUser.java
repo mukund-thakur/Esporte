@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.esporte.model.Base.BaseData;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,12 +23,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserTest extends BaseData {
+public class TestUser extends BaseData {
 	
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="email")
+	@Column(name="email",unique=true)
 	private String email;
 	
 	@Column(name="ranking")

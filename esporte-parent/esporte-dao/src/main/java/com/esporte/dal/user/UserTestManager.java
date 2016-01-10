@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.esporte.model.user.User;
-import com.esporte.model.user.UserTest;
+import com.esporte.model.user.TestUser;
 
 @Repository("userTestManager")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -23,39 +23,39 @@ public class UserTestManager {
 	EntityManager entityManager;
 
 	
-	public UserTest createTestUser(UserTest user) {
+	public TestUser createTestUser(TestUser user) {
 		return entityManager.merge(user);
 	}
 
 
-	public UserTest getTestUserByEmail(String userEmail) {
+	public TestUser getTestUserByEmail(String userEmail) {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<UserTest> criteriaQuery = builder.createQuery(UserTest.class);
-		Root<UserTest> root = criteriaQuery.from(UserTest.class);
+		CriteriaQuery<TestUser> criteriaQuery = builder.createQuery(TestUser.class);
+		Root<TestUser> root = criteriaQuery.from(TestUser.class);
 		criteriaQuery.select(root);
 		criteriaQuery.where(builder.equal(root.get("email"), userEmail));
-		List<UserTest> users = entityManager.createQuery(criteriaQuery).getResultList();
-		if(users.size() > 0 )
+		List<TestUser> users = entityManager.createQuery(criteriaQuery).getResultList();
+	    if(users.size() > 0 )
 			return users.get(0);
 		else
 			return null;
 	}
 
 
-	public List<UserTest> getAllTestUsers() {
+	public List<TestUser> getAllTestUsers() {
 		// TODO Auto-generated method stub
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<UserTest> criteriaQuery = builder.createQuery(UserTest.class);
-		Root<UserTest> root = criteriaQuery.from(UserTest.class);
+		CriteriaQuery<TestUser> criteriaQuery = builder.createQuery(TestUser.class);
+		Root<TestUser> root = criteriaQuery.from(TestUser.class);
 		criteriaQuery.select(root);
 		return entityManager.createQuery(criteriaQuery).getResultList();
 	}
 
 
-	public UserTest getTestUserBy(long id) {
+	public TestUser getTestUserBy(long id) {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<UserTest> criteriaQuery = builder.createQuery(UserTest.class);
-		Root<UserTest> root = criteriaQuery.from(UserTest.class);
+		CriteriaQuery<TestUser> criteriaQuery = builder.createQuery(TestUser.class);
+		Root<TestUser> root = criteriaQuery.from(TestUser.class);
 		criteriaQuery.select(root);
 		criteriaQuery.where(builder.equal(root.get("id"), id));
 		return entityManager.createQuery(criteriaQuery).getResultList().get(0);

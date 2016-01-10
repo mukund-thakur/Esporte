@@ -2,13 +2,14 @@ package com.esporte.bl.user;
 
 import java.util.List;
 
+import org.esporte.common.exception.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.esporte.dal.user.UserTestManager;
 import com.esporte.model.Request.TestUserRegisterRequest;
 import com.esporte.model.user.User;
-import com.esporte.model.user.UserTest;
+import com.esporte.model.user.TestUser;
 
 @Component
 public class UserTestService {
@@ -16,23 +17,27 @@ public class UserTestService {
 	@Autowired
 	private UserTestManager userTestManager;
 	
-	public UserTest createUser(TestUserRegisterRequest userRegisterRequest) {
-		UserTest userTest = new UserTest();
+	public TestUser createUser(TestUserRegisterRequest userRegisterRequest) throws UserAlreadyExistsException {
+		if ( userTestManager.getTestUserByEmail(userRegisterRequest.getEmail()) != null) {
+			throw new  UserAlreadyExistsException(userRegisterRequest.getEmail());
+		}
+		TestUser userTest = new TestUser();
 		userTest.setEmail(userRegisterRequest.getEmail());
 		userTest.setName(userRegisterRequest.getName());
+		userTest.setRanking(userTestManager.getAllTestUsers().size() + 1);
 		return userTestManager.createTestUser(userTest);
 	}
 
-	public UserTest getUserByEmail(String userName) {
+	public TestUser getUserByEmail(String userName) {
 		
 		return userTestManager.getTestUserByEmail(userName);
 	}
 
-	public List<UserTest> getAllTestUsers() {
+	public List<TestUser> getAllTestUsers() {
 		return userTestManager.getAllTestUsers();
 	}
 
-	public UserTest getTestUserById(long id) {
+	public TestUser getTestUserById(long id) {
 		return userTestManager.getTestUserBy(id);
 	}
 }
