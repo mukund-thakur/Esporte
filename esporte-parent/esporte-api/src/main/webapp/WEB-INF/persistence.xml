@@ -8,6 +8,7 @@
 		<class>com.esporte.model.user.PhoneNumber</class>
 		<class>com.esporte.model.user.PhoneDetails</class>
 		<class>com.esporte.model.user.UserTest</class>
+		<class>com.esporte.model.user.Match</class>
 	</persistence-unit>
 	
 </persistence>

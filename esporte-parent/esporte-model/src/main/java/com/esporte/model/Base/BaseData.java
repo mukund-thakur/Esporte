@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 import org.esporte.common.utils.DateTimeUtil;
 import org.joda.time.DateTimeUtils;
@@ -30,6 +31,10 @@ public class BaseData {
 		createdAt = DateTimeUtil.getCurrentDateTime();
 		updatedAt = createdAt;
 	}
+	@PreUpdate
+    protected void onUpdate() {
+        updatedAt = DateTimeUtil.getCurrentDateTime();
+        }
 	public long getId() {
 		return id;
 	}
