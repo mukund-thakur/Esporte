@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esporte.bl.user.UserTestService;
@@ -52,9 +53,14 @@ public class UserTestController {
 		return userTestService.getAllTestUsers();
 	}
 	
-	@RequestMapping(value = "/{id}" ,method = RequestMethod.GET , produces = "application/json")
+	@RequestMapping(value = "/getById/{id}" ,method = RequestMethod.GET , produces = "application/json")
 	@ResponseBody
 	public UserTest getTestUserById(@PathVariable("id") long id) {
 		return userTestService.getTestUserById(id);
+	}
+	@RequestMapping(value = "/getByEmail" ,method = RequestMethod.GET , consumes="application/json",produces = "application/json")
+	@ResponseBody
+	public UserTest getTestUserByEmail(@RequestParam("email") String email) {
+		return userTestService.getUserByEmail(email);
 	}
 }
