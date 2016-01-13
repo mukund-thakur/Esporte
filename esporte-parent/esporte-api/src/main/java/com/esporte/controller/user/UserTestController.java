@@ -43,6 +43,12 @@ public class UserTestController {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		} 		
 	}
+	@RequestMapping(value="/update" , method=RequestMethod.PUT,consumes="application/json" , produces = "application/json")
+	@ResponseBody
+	public TestUser updateUser(@RequestBody TestUser testUser ) {
+		return userTestService.updateUser(testUser);
+	}
+	
 	
 	@RequestMapping(value="/{userEmail}/exist" ,  method=RequestMethod.GET, produces="application/json" )
 	@ResponseBody

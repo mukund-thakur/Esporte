@@ -3,6 +3,7 @@ package com.esporte.bl.user;
 import java.util.List;
 
 import org.esporte.common.exception.UserAlreadyExistsException;
+import org.esporte.common.utils.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,5 +40,15 @@ public class UserTestService {
 
 	public TestUser getTestUserById(long id) {
 		return userTestManager.getTestUserBy(id);
+	}
+
+	public TestUser updateUser(TestUser testUser) {
+		TestUser user = userTestManager.getTestUserBy(testUser.getId());
+		user.setUpdatedAt(DateTimeUtil.getCurrentDateTime());
+		user.setLevel(testUser.getLevel());
+		user.setRanking(testUser.getRanking());
+		user.setSeeding(testUser.getSeeding());
+		return userTestManager.createTestUser(user);
+		
 	}
 }
