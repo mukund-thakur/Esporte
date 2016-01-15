@@ -57,6 +57,6 @@ public class Sport {
 	private String description;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "sport", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "sport", cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private Set<PlayerSportMapping> playerSportMappings = new HashSet<PlayerSportMapping>();
 }

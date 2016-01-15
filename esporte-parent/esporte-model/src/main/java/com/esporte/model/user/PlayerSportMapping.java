@@ -14,6 +14,7 @@ import org.hibernate.annotations.ManyToAny;
 import com.esporte.model.Base.BaseData;
 import com.esporte.model.sport.Sport;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.deser.Deserializers.Base;
 
 import lombok.Getter;
@@ -28,7 +29,7 @@ public class PlayerSportMapping extends BaseData{
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
-	@JsonBackReference
+	@JsonIgnore
 	private User user;
 	
 	@ManyToOne(cascade=CascadeType.ALL)

@@ -98,9 +98,8 @@ public class User extends BaseData{
 	inverseJoinColumns = {@JoinColumn(name="interest_id",referencedColumnName="id")})
 	private Set<UserInterest> userInterests = new HashSet<UserInterest>();
 	
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL,mappedBy="user")
-	@JsonManagedReference
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="user",fetch=FetchType.EAGER)
 	private Set<PlayerSportMapping> playerSportMappings = new HashSet<PlayerSportMapping>();
 	
 }
