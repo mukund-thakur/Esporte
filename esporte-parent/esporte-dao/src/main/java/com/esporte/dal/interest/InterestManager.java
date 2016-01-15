@@ -26,4 +26,8 @@ public class InterestManager {
 		criteriaQuery.select(userInterestRoot);
 		return entityManager.createQuery(criteriaQuery).getResultList();
 	}
+
+	public UserInterest getInterestById(long interestId) {
+		return entityManager.find(UserInterest.class, interestId);
+	}
 }

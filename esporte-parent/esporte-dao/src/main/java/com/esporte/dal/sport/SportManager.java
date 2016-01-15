@@ -25,4 +25,19 @@ public class SportManager {
 		criteriaQuery.select(root);
 		return entityManager.createQuery(criteriaQuery).getResultList();
 	}
+
+	public Sport getSportById(long sportId) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Sport> criteriaQuery = criteriaBuilder.createQuery(Sport.class);
+		Root<Sport> root = criteriaQuery.from(Sport.class);
+		criteriaQuery.select(root);
+		criteriaQuery.where(criteriaBuilder.equal(root.get("id"), sportId));
+		List<Sport> reSports = entityManager.createQuery(criteriaQuery).getResultList();
+		if ( reSports.size() > 0)
+			return reSports.get(0);
+		else 
+			return null;
+					
+	}
 }

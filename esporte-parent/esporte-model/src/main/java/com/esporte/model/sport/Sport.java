@@ -1,16 +1,27 @@
 package com.esporte.model.sport;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
 import org.neo4j.cypher.internal.commands.True;
 
-import com.esporte.model.user.User.Type;
+import com.esporte.model.user.PlayerSportMapping;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,8 +38,9 @@ public class Sport {
 	private long id;
 	
 	public enum SPORTS_TYPE {
-		TEAM,
-		INDIVIDUAL
+		SINGLE,
+		DOUBLE,
+		TEAM
 	}
 	
 	@Column(name="sports_type")
@@ -43,4 +55,8 @@ public class Sport {
 	
 	@Column(name="description")
 	private String description;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "sport", cascade=CascadeType.ALL)
+	private Set<PlayerSportMapping> playerSportMappings = new HashSet<PlayerSportMapping>();
 }

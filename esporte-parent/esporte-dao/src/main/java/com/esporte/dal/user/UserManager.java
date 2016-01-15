@@ -37,13 +37,30 @@ public class UserManager {
 	public User create(User user) {
 		return entityManager.merge(user);
 	}
-
+	
+	
+	public User update(User user) {
+		return entityManager.merge(user);
+	}
 	public User getUserByName(String userName) {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);
 		Root<User> root = criteriaQuery.from(User.class);
 		criteriaQuery.select(root);
 		criteriaQuery.where(builder.equal(root.get("userName"), userName));
+		List<User> users = entityManager.createQuery(criteriaQuery).getResultList();
+		if(users.size() > 0 )
+			return users.get(0);
+		else
+			return null;
+	}
+
+	public User getUserById(long userId) {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);
+		Root<User> root = criteriaQuery.from(User.class);
+		criteriaQuery.select(root);
+		criteriaQuery.where(builder.equal(root.get("id"),userId));
 		List<User> users = entityManager.createQuery(criteriaQuery).getResultList();
 		if(users.size() > 0 )
 			return users.get(0);

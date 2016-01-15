@@ -1,5 +1,8 @@
 package com.esporte.model.user;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,6 +27,10 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Cascade;
 
 import com.esporte.model.Base.BaseData;
+import com.esporte.model.Base.UserType;
+import com.esporte.model.sport.Sport;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.*;
 import scala.util.parsing.combinator.testing.Str;;
@@ -38,13 +45,6 @@ import scala.util.parsing.combinator.testing.Str;;
 @Getter
 @Setter
 public class User extends BaseData{
-
-	public enum Type {
-		PLAYER,
-		COACH,
-		VENDOR
-	}
-	
 	
 	@Column(name="gender")
 	private int gender;
@@ -62,108 +62,46 @@ public class User extends BaseData{
 	private String password;
 	
 	@Column(name="status")
-	private int status;
+	private int status = 1;
 	
 	
 	@Column(name="user_type")
 	@Enumerated(EnumType.STRING)
-	Type userType;
+	private UserType userType;
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name="user_email_mapping", joinColumns={@JoinColumn(name="user_id",referencedColumnName="id")}
 	,inverseJoinColumns={@JoinColumn(name="email_id",referencedColumnName="id")})
-	private Set<Email> emailIds;
+	private Set<Email> emailIds = new HashSet<Email>();
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name="user_phone_number_mapping",
 	joinColumns={@JoinColumn(name="user_id",referencedColumnName="id")},
 	inverseJoinColumns={@JoinColumn(name="phone_number_id",referencedColumnName="id")})
-	private Set<PhoneNumber> phoneNumbers;
+	private Set<PhoneNumber> phoneNumbers = new HashSet<PhoneNumber>();
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name="user_phone_details_mapping",
 	joinColumns={@JoinColumn(name="user_id",referencedColumnName="id")},
 	inverseJoinColumns={@JoinColumn(name="phone_details_id",referencedColumnName="id")})
-	private Set<PhoneDetails> phoneDetails;
-	public Set<Email> getEmailIds() {
-		return emailIds;
-	}
-
-	public void setEmailIds(Set<Email> emailIds) {
-		this.emailIds = emailIds;
-	}
-
-
-	public int getGender() {
-		return gender;
-	}
-
-	public void setGender(int gender) {
-		this.gender = gender;
-	}
-
-	public String getDob() {
-		return dob;
-	}
-
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}	
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public Type getUserType() {
-		return userType;
-	}
-
-	public void setUserType(Type userType) {
-		this.userType = userType;
-	}
-
-	public Set<PhoneNumber> getPhoneNumbers() {
-		return phoneNumbers;
-	}
-
-	public void setPhoneNumbers(Set<PhoneNumber> phoneNumbers) {
-		this.phoneNumbers = phoneNumbers;
-	}
-
-	public Set<PhoneDetails> getPhoneDetails() {
-		return phoneDetails;
-	}
-
-	public void setPhoneDetails(Set<PhoneDetails> phoneDetails) {
-		this.phoneDetails = phoneDetails;
-	}
+	private Set<PhoneDetails> phoneDetails = new HashSet<PhoneDetails>();
+	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER )
+	@JoinTable(name="user_address_mapping",
+	joinColumns = {@JoinColumn(name="user_id",referencedColumnName="id")},
+	inverseJoinColumns = {@JoinColumn(name="address_id", referencedColumnName = "id")})
+	private Set<UserAddress> userAddresses = new HashSet<UserAddress>();
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinTable(name = "user_interest_mapping",
+	joinColumns = {@JoinColumn(name="user_id",referencedColumnName="id")},
+	inverseJoinColumns = {@JoinColumn(name="interest_id",referencedColumnName="id")})
+	private Set<UserInterest> userInterests = new HashSet<UserInterest>();
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="user")
+	@JsonManagedReference
+	private Set<PlayerSportMapping> playerSportMappings = new HashSet<PlayerSportMapping>();
 	
 }
 
