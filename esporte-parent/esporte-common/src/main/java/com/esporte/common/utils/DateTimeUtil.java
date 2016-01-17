@@ -1,4 +1,4 @@
-package org.esporte.common.utils;
+package com.esporte.common.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

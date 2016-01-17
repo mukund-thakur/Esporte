@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.esporte.common.utils.DateTimeUtil;
 import org.joda.time.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.esporte.common.utils.DateTimeUtil;
 import com.esporte.dal.interest.InterestManager;
 import com.esporte.dal.mapping.PlayerSportsMappingManager;
 import com.esporte.dal.sport.SportManager;
@@ -28,6 +28,7 @@ import com.esporte.model.user.PlayerSportMapping;
 import com.esporte.model.user.User;
 import com.esporte.model.user.UserAddress;
 import com.esporte.model.user.UserInterest;
+import com.esporte.common.exception.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -53,7 +54,13 @@ public class UserService {
 		return userManager.getAllUsers();
 	}
 
-	public User createUser(UserRegisterRequest userRegisterRequest) {
+	public User createUser(UserRegisterRequest userRegisterRequest) throws UserWithEmailAlreadyExistsException,UserWithPhoneAlreadyExistsException {
+		if ( userManager.getUserByEmail(userRegisterRequest.getEmail()) != null) {
+			throw new UserWithEmailAlreadyExistsException(userRegisterRequest.getEmail());
+		}
+		if ( userManager.getUserByPhone(userRegisterRequest.getPhoneNumber()) != null) {
+			throw new UserWithPhoneAlreadyExistsException(userRegisterRequest.getPhoneNumber());
+		}
 		User user = new User();
 		user.setName(userRegisterRequest.getName());
 		user.setPassword(userRegisterRequest.getPassWord());

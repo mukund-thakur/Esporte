@@ -8,8 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 
-import org.esporte.common.utils.DateTimeUtil;
 import org.joda.time.DateTimeUtils;
+
+import com.esporte.common.utils.DateTimeUtil;
 
 @MappedSuperclass
 public class BaseData {

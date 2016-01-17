@@ -54,7 +54,11 @@
 		  	<artifactId>esporte-model</artifactId>
 	  		<version>1.0.0</version>
   		</dependency>
-  		
+  		<dependency>
+			 <groupId>esporte-common</groupId>
+			 <artifactId>esporte-common</artifactId>
+			 <version>1.0.0</version>
+  		</dependency>
 		<dependency>
 			<groupId>esporte-common</groupId>
 		  	<artifactId>esporte-common</artifactId>
