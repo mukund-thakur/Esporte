@@ -73,6 +73,7 @@ public class UserManager {
 		Session session = entityManager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(User.class);
 		Criteria phoneCriteria = criteria.createCriteria("phoneNumbers");
+		phoneCriteria.add(Restrictions.eq("number", phoneNumber));
 		List<User> users = criteria.list();
 		if(users.size() > 0 )
 			return users.get(0);
