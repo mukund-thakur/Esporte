@@ -39,7 +39,7 @@
 		<beans:property name="databasePlatform"
 			value="org.hibernate.dialect.HSQLDialect" />
 		 <beans:property name="generateDdl" value="true" />
-         <beans:property name="showSql" value="true" />	
+         <beans:property name="showSql" value="true" />
 	</beans:bean>
 
 	<beans:bean id="jpaDialect"

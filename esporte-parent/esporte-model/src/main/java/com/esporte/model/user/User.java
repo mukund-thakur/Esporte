@@ -21,6 +21,7 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -28,6 +29,7 @@ import org.hibernate.annotations.Cascade;
 
 import com.esporte.model.Base.BaseData;
 import com.esporte.model.Base.UserType;
+import com.esporte.model.match.tennis.TennisMatch;
 import com.esporte.model.sport.Sport;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -102,5 +104,8 @@ public class User extends BaseData{
 	@OneToMany(cascade = CascadeType.ALL,mappedBy="user",fetch=FetchType.EAGER)
 	private Set<PlayerSportMapping> playerSportMappings = new HashSet<PlayerSportMapping>();
 	
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL,mappedBy="challenger_id",fetch=FetchType.LAZY)
+	private TennisMatch tennisMatch;
 }
 

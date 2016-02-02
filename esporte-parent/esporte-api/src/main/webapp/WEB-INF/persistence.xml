@@ -11,6 +11,7 @@
 		<class>com.esporte.model.sport.Sport</class>
 		<class>com.esporte.model.user.PlayerSportMapping</class>
 		<class>com.esporte.model.user.UserAddress</class>
+		<class>com.esporte.model.match.tennis.TennisMatch</class>
 	</persistence-unit>
 	
 </persistence>
