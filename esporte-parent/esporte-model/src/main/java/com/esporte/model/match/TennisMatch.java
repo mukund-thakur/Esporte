@@ -39,8 +39,8 @@ public class TennisMatch extends BaseData {
 	@JoinColumn(name = "acceptor_id")
 	private User acceptor_id;
 	
-	private Date date;
-	private Time time;
+	private Date match_date;
+	private Time match_time;
 	private String venue;
 	
 	
@@ -59,11 +59,12 @@ public class TennisMatch extends BaseData {
 	private String acceptor_partner_name;
 	private String game_type;
 	private int number_of_sets;
-	private int challenger_score;
-	private int acceptor_score;
+	private String challenger_score;
+	private String acceptor_score;
 	
-	
-	private long winner_id;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "winner_id")
+	private User winner_id;
 	
 	@Enumerated(EnumType.STRING)
 	private MatchStatus match_status;
@@ -97,18 +98,7 @@ public class TennisMatch extends BaseData {
 	public void setAcceptor_partner_id(User acceptor_partner_id) {
 		this.acceptor_partner_id = acceptor_partner_id;
 	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public Time getTime() {
-		return time;
-	}
-	public void setTime(Time time) {
-		this.time = time;
-	}
+	
 	public String getVenue() {
 		return venue;
 	}
@@ -140,24 +130,37 @@ public class TennisMatch extends BaseData {
 	public void setNumber_of_sets(int number_of_sets) {
 		this.number_of_sets = number_of_sets;
 	}
-	public int getChallenger_score() {
+
+	
+	public String getChallenger_score() {
 		return challenger_score;
 	}
-	public void setChallenger_score(int challenger_score) {
+	public void setChallenger_score(String challenger_score) {
 		this.challenger_score = challenger_score;
 	}
-	public int getAcceptor_score() {
+	public String getAcceptor_score() {
 		return acceptor_score;
 	}
-	public void setAcceptor_score(int acceptor_score) {
+	public void setAcceptor_score(String acceptor_score) {
 		this.acceptor_score = acceptor_score;
 	}
-
-	public long getWinner_id() {
+	public Date getMatch_date() {
+		return match_date;
+	}
+	public void setMatch_date(Date match_date) {
+		this.match_date = match_date;
+	}
+	public Time getMatch_time() {
+		return match_time;
+	}
+	public void setMatch_time(Time match_time) {
+		this.match_time = match_time;
+	}
+	public User getWinner_id() {
 		return winner_id;
 	}
-	public void setWinner_id(long l) {
-		this.winner_id = l;
+	public void setWinner_id(User winner_id) {
+		this.winner_id = winner_id;
 	}
 	public MatchStatus getMatch_status() {
 		return match_status;

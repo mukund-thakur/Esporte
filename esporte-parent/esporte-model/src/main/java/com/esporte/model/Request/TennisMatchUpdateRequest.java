@@ -40,10 +40,10 @@ public class TennisMatchUpdateRequest {
 	private int number_of_sets;
 	
 	@JsonProperty
-	private int challenger_score;
+	private String challenger_score;
 	
 	@JsonProperty
-	private int acceptor_score;
+	private String acceptor_score;
 	
 	@JsonProperty
 	private long winner_id;
@@ -92,14 +92,7 @@ public class TennisMatchUpdateRequest {
 		return number_of_sets;
 	}
 
-	public int getChallenger_score() {
-		return challenger_score;
-	}
-
-	public int getAcceptor_score() {
-		return acceptor_score;
-	}
-
+	
 	public long getWinner_id() {
 		return winner_id;
 	}
@@ -148,11 +141,20 @@ public class TennisMatchUpdateRequest {
 		this.number_of_sets = number_of_sets;
 	}
 
-	public void setChallenger_score(int challenger_score) {
+	
+	public String getChallenger_score() {
+		return challenger_score;
+	}
+
+	public void setChallenger_score(String challenger_score) {
 		this.challenger_score = challenger_score;
 	}
 
-	public void setAcceptor_score(int acceptor_score) {
+	public String getAcceptor_score() {
+		return acceptor_score;
+	}
+
+	public void setAcceptor_score(String acceptor_score) {
 		this.acceptor_score = acceptor_score;
 	}
 

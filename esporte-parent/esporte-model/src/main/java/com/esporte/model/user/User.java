@@ -104,7 +104,7 @@ public class User extends BaseData{
 
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy="challenger_id",fetch=FetchType.LAZY)
-	private Set<TennisMatch> tennisMatchs = new HashSet<TennisMatch>();
+	private Set<TennisMatch> tennisMatchChallenger = new HashSet<TennisMatch>();
 	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy="acceptor_id",fetch=FetchType.LAZY)
@@ -117,7 +117,12 @@ public class User extends BaseData{
 	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy="challenger_partner_id",fetch=FetchType.LAZY)
-	private Set<TennisMatch> tennisMatchAcceptorAcceptor = new HashSet<TennisMatch>();
+	private Set<TennisMatch> tennisMatchChallengerPartner = new HashSet<TennisMatch>();
+	
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="winner_id",fetch=FetchType.LAZY)
+	private Set<TennisMatch> tennisMatchWinner = new HashSet<TennisMatch>();	
 	
 	
 	public int getGender() {
@@ -248,6 +253,57 @@ public class User extends BaseData{
 	public void setPlayerSportMappings(Set<PlayerSportMapping> playerSportMappings) {
 		this.playerSportMappings = playerSportMappings;
 	}
+
+
+	public Set<TennisMatch> getTennisMatchChallenger() {
+		return tennisMatchChallenger;
+	}
+
+
+	public void setTennisMatchChallenger(Set<TennisMatch> tennisMatchChallenger) {
+		this.tennisMatchChallenger = tennisMatchChallenger;
+	}
+
+
+	public Set<TennisMatch> getTennisMatchsAcceptor() {
+		return tennisMatchsAcceptor;
+	}
+
+
+	public void setTennisMatchsAcceptor(Set<TennisMatch> tennisMatchsAcceptor) {
+		this.tennisMatchsAcceptor = tennisMatchsAcceptor;
+	}
+
+
+	public Set<TennisMatch> getTennisMatchAcceptorPartner() {
+		return tennisMatchAcceptorPartner;
+	}
+
+
+	public void setTennisMatchAcceptorPartner(Set<TennisMatch> tennisMatchAcceptorPartner) {
+		this.tennisMatchAcceptorPartner = tennisMatchAcceptorPartner;
+	}
+
+
+	public Set<TennisMatch> getTennisMatchChallengerPartner() {
+		return tennisMatchChallengerPartner;
+	}
+
+
+	public void setTennisMatchChallengerPartner(Set<TennisMatch> tennisMatchChallengerPartner) {
+		this.tennisMatchChallengerPartner = tennisMatchChallengerPartner;
+	}
+
+
+	public Set<TennisMatch> getTennisMatchWinner() {
+		return tennisMatchWinner;
+	}
+
+
+	public void setTennisMatchWinner(Set<TennisMatch> tennisMatchWinner) {
+		this.tennisMatchWinner = tennisMatchWinner;
+	}
+	
 	
 }
 

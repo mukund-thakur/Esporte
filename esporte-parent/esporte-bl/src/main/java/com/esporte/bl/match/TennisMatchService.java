@@ -42,12 +42,12 @@ public class TennisMatchService {
 		int year = Integer.parseInt(dateArray[0])-1900;
 		int month = Integer.parseInt(dateArray[1])-1;
 		Date date = new Date(year, month, Integer.parseInt(dateArray[2]));
-		tennisMatch.setDate(date);
+		tennisMatch.setMatch_date(date);
 		
 		String timeString = tennisMatchCreate.getMatch_time();
 		String [] timeArray= timeString.split(":");
 		Time time = new Time(Integer.parseInt(timeArray[0]), Integer.parseInt(timeArray[1]), Integer.parseInt( timeArray[2]));
-		tennisMatch.setTime(time);
+		tennisMatch.setMatch_time(time);
 		tennisMatch.setVenue(tennisMatchCreate.getVenue());
 		tennisMatch.setChallenger_partner_id(userManager.getUserById(tennisMatchCreate.getChallenger_partner_id()));
 		tennisMatch.setAcceptor_partner_id(userManager.getUserById(tennisMatchCreate.getAcceptor_partner_id()));
@@ -74,12 +74,12 @@ public class TennisMatchService {
 		int year = Integer.parseInt(dateArray[0])-1900;
 		int month = Integer.parseInt(dateArray[1])-1;
 		Date date = new Date(year, month, Integer.parseInt(dateArray[2]));
-		matchToUpdate.setDate(date);
+		matchToUpdate.setMatch_date(date);
 		
 		String timeString = tennisMatchUpdateRequest.getMatch_time();
 		String [] timeArray= timeString.split(":");
 		Time time = new Time(Integer.parseInt(timeArray[0]), Integer.parseInt(timeArray[1]), Integer.parseInt( timeArray[2]));
-		matchToUpdate.setTime(time);
+		matchToUpdate.setMatch_time(time);
 		
 		matchToUpdate.setVenue(tennisMatchUpdateRequest.getVenue());
 		
@@ -92,7 +92,7 @@ public class TennisMatchService {
 		matchToUpdate.setMatch_status(tennisMatchUpdateRequest.getMatch_status());
 		matchToUpdate.setChallenger_score(tennisMatchUpdateRequest.getChallenger_score());
 		matchToUpdate.setAcceptor_score(tennisMatchUpdateRequest.getAcceptor_score());
-		matchToUpdate.setWinner_id(tennisMatchUpdateRequest.getWinner_id());		
+		matchToUpdate.setWinner_id(userManager.getUserById(tennisMatchUpdateRequest.getWinner_id()));		
 		
 		return tennisMatchManager.update(matchToUpdate);
 
