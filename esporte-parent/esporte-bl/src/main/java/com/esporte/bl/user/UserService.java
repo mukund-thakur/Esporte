@@ -1,5 +1,6 @@
 package com.esporte.bl.user;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import com.esporte.dal.user.UserManager;
 import com.esporte.model.Request.Address;
 import com.esporte.model.Request.SportDetails;
 import com.esporte.model.Request.UserRegisterRequest;
+import com.esporte.model.Request.UserSearchRequest;
 import com.esporte.model.Request.UserUpdateRequest;
 import com.esporte.model.sport.Sport;
 import com.esporte.model.user.Email;
@@ -147,7 +149,15 @@ public class UserService {
 	}
 
 	private void populateUserDetails(UserUpdateRequest userUpdateRequest, User userToUpdate) {
-		userToUpdate.setDob(userUpdateRequest.getDateOfBirth());
+		
+		String dateString = userUpdateRequest.getDateOfBirth();
+		String [] dateArray = dateString.split("-");
+		int year = Integer.parseInt(dateArray[0])-1900;
+		int month = Integer.parseInt(dateArray[1])-1;
+		Date date = new Date(year, month, Integer.parseInt(dateArray[2]));
+		userToUpdate.setDob(date);
+		
+		//userToUpdate.setDob(userUpdateRequest.getDateOfBirth());
 		userToUpdate.setGender(userUpdateRequest.getSex().getValue());
 		userToUpdate.setUserType(userUpdateRequest.getUserType());
 		userToUpdate.setUserName(userUpdateRequest.getUserName());
@@ -155,6 +165,10 @@ public class UserService {
 
 	public User getUserById(long id) {
 		return userManager.getUserById(id);
+	}
+	
+	public List<User> searchUser(UserSearchRequest userSearchRequest) {
+		return userManager.userSearch(userSearchRequest);
 	}
 
 }

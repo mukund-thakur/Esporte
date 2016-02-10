@@ -1,6 +1,7 @@
 package com.esporte.model.user;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,7 +51,7 @@ public class User extends BaseData{
 	private int gender;
 	
 	@Column(name="dob")
-	private String dob;
+	private Date dob;
 	
 	@Column(name="name")
 	private String name;
@@ -135,12 +136,14 @@ public class User extends BaseData{
 	}
 
 
-	public String getDob() {
+	
+
+	public Date getDob() {
 		return dob;
 	}
 
 
-	public void setDob(String dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 
