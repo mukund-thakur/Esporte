@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import com.esporte.model.Base.Sex;
 import com.esporte.model.Base.UserType;
 import com.esporte.model.sport.Sport;
+import com.esporte.model.user.Address;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
@@ -42,5 +43,6 @@ public class UserUpdateRequest {
 	
 	@JsonProperty
 	private List<Long> interestIds;
+
 
 }

@@ -1,5 +1,6 @@
 package com.esporte.model.Request;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EnumType;
@@ -23,7 +24,7 @@ public class CoachUpdateRequest {
 	private String userName;
 	
 	@JsonProperty
-	private String dateOfBirth;
+	private Date dateOfBirth;
 	
 	@JsonProperty
 	private Sex sex;

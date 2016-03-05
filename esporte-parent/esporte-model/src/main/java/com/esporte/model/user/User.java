@@ -1,6 +1,7 @@
 package com.esporte.model.user;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +30,7 @@ import org.hibernate.annotations.Cascade;
 import com.esporte.model.Base.BaseData;
 import com.esporte.model.Base.UserType;
 import com.esporte.model.coach.CoachBooking;
+import com.esporte.model.match.TennisMatch;
 import com.esporte.model.sport.Sport;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -51,7 +53,7 @@ public class User extends BaseData{
 	private int gender;
 	
 	@Column(name="dob")
-	private String dob;
+	private Date dob;
 	
 	@Column(name="name")
 	private String name;
@@ -102,7 +104,28 @@ public class User extends BaseData{
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy="user",fetch=FetchType.EAGER)
 	private Set<PlayerSportMapping> playerSportMappings = new HashSet<PlayerSportMapping>();
+
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="challenger_id",fetch=FetchType.LAZY)
+	private Set<TennisMatch> tennisMatchChallenger = new HashSet<TennisMatch>();
 	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="acceptor_id",fetch=FetchType.LAZY)
+	private Set<TennisMatch> tennisMatchsAcceptor = new HashSet<TennisMatch>();
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="acceptor_partner_id",fetch=FetchType.LAZY)
+	private Set<TennisMatch> tennisMatchAcceptorPartner = new HashSet<TennisMatch>();
+	
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="challenger_partner_id",fetch=FetchType.LAZY)
+	private Set<TennisMatch> tennisMatchChallengerPartner = new HashSet<TennisMatch>();
+	
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="winner_id",fetch=FetchType.LAZY)
+	private Set<TennisMatch> tennisMatchWinner = new HashSet<TennisMatch>();	
 	
 	@OneToMany(cascade = CascadeType.ALL , mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<CoachSportsMapping> coachSportsMappings = new HashSet<CoachSportsMapping>();

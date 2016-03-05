@@ -17,6 +17,7 @@
 		<class>com.esporte.model.coach.CoachAvailability</class>
 		<class>com.esporte.model.coach.CoachBooking</class>
 		<class>com.esporte.model.coach.CoachReviewRating</class>
+		<class>com.esporte.model.match.TennisMatch</class>
 	</persistence-unit>
 	
 </persistence>
