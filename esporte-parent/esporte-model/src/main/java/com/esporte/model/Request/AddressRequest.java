@@ -13,7 +13,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Address {
+public class AddressRequest {
 	
 	@JsonProperty
 	private String country;

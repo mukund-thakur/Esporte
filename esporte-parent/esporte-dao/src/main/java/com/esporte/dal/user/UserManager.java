@@ -9,12 +9,14 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.esporte.model.Base.UserType;
 import com.esporte.model.user.User;
 
 import lombok.Getter;
@@ -102,5 +104,19 @@ public class UserManager {
 		else 
 			return list.get(0);
 		
+	}
+
+	public List<User> getAllCoach(String sportName) {
+		Session session = entityManager.unwrap(Session.class);
+		Criteria criteria = session.createCriteria(User.class);
+		criteria.add(Restrictions.eq("userType",UserType.COACH));
+		criteria.setProjection(Projections.distinct(Projections.property("id")));
+		if (sportName != null) {
+		Criteria sportMappingCriteria = criteria.createCriteria("coachSportsMappings");
+		Criteria sportCriteria = sportMappingCriteria.createCriteria("sport");
+		sportCriteria.add(Restrictions.eq("name", sportName));
+		}
+		List<User> users = criteria.list();
+		return users;
 	}
 }

@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.neo4j.cypher.internal.commands.True;
 
+import com.esporte.model.user.CoachSportsMapping;
 import com.esporte.model.user.PlayerSportMapping;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -43,6 +44,10 @@ public class Sport {
 		TEAM
 	}
 	
+	@Column(name="name")
+	private String name;
+	
+	
 	@Column(name="sports_type")
 	@Enumerated(EnumType.STRING)
 	SPORTS_TYPE sType;
@@ -59,4 +64,8 @@ public class Sport {
 	@JsonIgnore
 	@OneToMany(mappedBy = "sport", cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private Set<PlayerSportMapping> playerSportMappings = new HashSet<PlayerSportMapping>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "sport", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private Set<CoachSportsMapping> coachSportsMappings = new HashSet<CoachSportsMapping>();
 }

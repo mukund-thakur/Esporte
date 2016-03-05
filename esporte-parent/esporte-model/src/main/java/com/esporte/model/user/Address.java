@@ -4,10 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.esporte.model.Base.AddressType;
 import com.esporte.model.Base.BaseData;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +19,7 @@ import lombok.Setter;
 @Table(name = "address")
 @Getter
 @Setter
-public class UserAddress extends BaseData{
+public class Address extends BaseData{
 	
 	
 	@Column(name = "country")
@@ -49,4 +52,8 @@ public class UserAddress extends BaseData{
 	@Column(name="address_type")
 	@Enumerated(EnumType.STRING)
 	private AddressType addressType;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy="clubAddress",fetch=FetchType.LAZY)
+	private Club club;
 }

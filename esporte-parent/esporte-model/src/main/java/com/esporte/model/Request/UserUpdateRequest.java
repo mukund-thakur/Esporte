@@ -35,10 +35,10 @@ public class UserUpdateRequest {
 	private UserType userType;
 	
 	@JsonProperty
-	private List<Address> address;
+	private List<AddressRequest> address;
 	
 	@JsonProperty
-	private List<SportDetails> sports;
+	private List<SportDetailsRequest> sports;
 	
 	@JsonProperty
 	private List<Long> interestIds;

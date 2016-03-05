@@ -12,13 +12,13 @@ import com.esporte.dal.mapping.PlayerSportsMappingManager;
 import com.esporte.dal.sport.SportManager;
 import com.esporte.dal.user.UserManager;
 import com.esporte.model.Base.BaseData;
-import com.esporte.model.Request.Address;
-import com.esporte.model.Request.SportDetails;
+import com.esporte.model.Request.AddressRequest;
+import com.esporte.model.Request.SportDetailsRequest;
 import com.esporte.model.Request.UserUpdateRequest;
 import com.esporte.model.sport.Sport;
 import com.esporte.model.user.PlayerSportMapping;
 import com.esporte.model.user.User;
-import com.esporte.model.user.UserAddress;
+import com.esporte.model.user.Address;
 
 @Component
 public class PlayerSportsMappingService extends BaseData{
@@ -40,7 +40,7 @@ public class PlayerSportsMappingService extends BaseData{
 		userToUpdate.setGender(userSportMappingRequest.getSex().getValue());
 		userToUpdate.setUserName(userSportMappingRequest.getUserName());
 		Set<PlayerSportMapping> playerSportMappings = new HashSet<PlayerSportMapping>();
-		for ( SportDetails sportDetails : userSportMappingRequest.getSports() ) {
+		for ( SportDetailsRequest sportDetails : userSportMappingRequest.getSports() ) {
 			PlayerSportMapping playerSportMapping = new PlayerSportMapping();
 			Sport sport = sportManager.getSportById(sportDetails.getSportId());
 			playerSportMapping.setUser(userToUpdate);
@@ -50,9 +50,9 @@ public class PlayerSportsMappingService extends BaseData{
 			playerSportMapping.setHasVenue(sportDetails.getHasVenue());
 			playerSportMappings.add(playerSportMapping);
 		}
-		Set<UserAddress> userAddresses = new HashSet<UserAddress>();
-		for (Address address : userSportMappingRequest.getAddress()) {
-			UserAddress userAddress = new UserAddress();
+		Set<Address> userAddresses = new HashSet<Address>();
+		for (AddressRequest address : userSportMappingRequest.getAddress()) {
+			Address userAddress = new Address();
 			userAddress.setCountry(address.getCountry());
 			userAddress.setAddress(address.getAddress());
 			userAddress.setAddressType(address.getAddressType());

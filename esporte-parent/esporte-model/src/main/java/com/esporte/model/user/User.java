@@ -28,6 +28,7 @@ import org.hibernate.annotations.Cascade;
 
 import com.esporte.model.Base.BaseData;
 import com.esporte.model.Base.UserType;
+import com.esporte.model.coach.CoachBooking;
 import com.esporte.model.sport.Sport;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -90,7 +91,7 @@ public class User extends BaseData{
 	@JoinTable(name="user_address_mapping",
 	joinColumns = {@JoinColumn(name="user_id",referencedColumnName="id")},
 	inverseJoinColumns = {@JoinColumn(name="address_id", referencedColumnName = "id")})
-	private Set<UserAddress> userAddresses = new HashSet<UserAddress>();
+	private Set<Address> userAddresses = new HashSet<Address>();
 	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinTable(name = "user_interest_mapping",
@@ -102,5 +103,15 @@ public class User extends BaseData{
 	@OneToMany(cascade = CascadeType.ALL,mappedBy="user",fetch=FetchType.EAGER)
 	private Set<PlayerSportMapping> playerSportMappings = new HashSet<PlayerSportMapping>();
 	
+	
+	@OneToMany(cascade = CascadeType.ALL , mappedBy = "user", fetch = FetchType.EAGER)
+	private Set<CoachSportsMapping> coachSportsMappings = new HashSet<CoachSportsMapping>();
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER , mappedBy = "user")
+	private Set<CoachInterestMapping> coachInterestMappings  = new HashSet<CoachInterestMapping>();
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy="player")
+	private Set<CoachBooking> coachBookings =  new HashSet<CoachBooking>();
 }
 

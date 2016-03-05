@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SportDetails {
+public class SportDetailsRequest {
 	
 	@JsonProperty
 	private long sportId;
