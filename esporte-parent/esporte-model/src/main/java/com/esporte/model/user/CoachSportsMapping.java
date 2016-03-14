@@ -63,6 +63,9 @@ public class CoachSportsMapping extends BaseData{
 	@Column(name = "rating")
 	private double rating;
 	
+	@Column(name = "sponsered")
+	private boolean sponsered;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "coach_sports_club_mapping" , 
 	joinColumns = {@JoinColumn(name = "coach_sports_mapping_id") } ,

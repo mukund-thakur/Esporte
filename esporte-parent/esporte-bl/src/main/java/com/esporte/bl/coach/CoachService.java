@@ -20,6 +20,7 @@ import com.esporte.dal.interest.InterestManager;
 import com.esporte.dal.mapping.CoachInterestMappingManager;
 import com.esporte.dal.mapping.CoachSportsMappingManager;
 import com.esporte.dal.sport.SportManager;
+import com.esporte.dal.user.AddressManager;
 import com.esporte.dal.user.UserManager;
 import com.esporte.model.Base.CoachBookingStatus;
 import com.esporte.model.Request.AddressRequest;
@@ -77,6 +78,9 @@ public class CoachService {
 	@Autowired
 	private CoachReviewRatingManager coachReviewRatingManager;
 	
+	@Autowired
+	private AddressManager addressManager;
+	
 	public User updateCoach(CoachUpdateRequest coachUpdateRequest) {
 		User user= userManager.getUserById(coachUpdateRequest.getUserId()); 
 		populateCoachAddressDetails(coachUpdateRequest,user);
@@ -114,16 +118,38 @@ public class CoachService {
 	private void populateCoachAddressDetails(CoachUpdateRequest userUpdateRequest, User userToUpdate) {
 		Set<Address> userAddresses = new HashSet<Address>();
 		for (AddressRequest address : userUpdateRequest.getAddress()) {
-			Address userAddress = new Address();
-			userAddress.setCountry(address.getCountry());
-			userAddress.setAddress(address.getAddress());
-			userAddress.setAddressType(address.getAddressType());
-			userAddress.setCity(address.getCity());
-			userAddress.setCoordinates(address.getCoordinates());
-			userAddress.setLandmark(address.getLandmark());
-			userAddress.setLocality(address.getLocality());
-			userAddress.setState(address.getState());
-			userAddress.setPin(address.getPin());
+			Address userAddress;
+			userAddress = addressManager.getAddressById(address.getId());
+			if ( userAddress == null) {
+				userAddress = new Address();
+			}
+			if ( address.getCountry() != null) {
+				userAddress.setCountry(address.getCountry());	
+			}
+			if ( address.getAddress() != null) {
+				userAddress.setAddress(address.getAddress());
+			}
+			if ( address.getAddressType() != null) {
+				userAddress.setAddressType(address.getAddressType());
+			}
+			if ( address.getCity() != null) {
+				userAddress.setCity(address.getCity());
+			}
+			if ( address.getCoordinates() != null) {
+				userAddress.setCoordinates(address.getCoordinates());
+			}
+			if ( address.getLandmark() != null) {
+				userAddress.setLandmark(address.getLandmark());
+			}
+			if ( address.getLocality() != null) {
+				userAddress.setLocality(address.getLocality());
+			}
+			if ( address.getState() != null) {
+				userAddress.setState(address.getState());
+			}
+			if ( address.getPin() != 0) {
+				userAddress.setPin(address.getPin());
+			}
 			userAddresses.add(userAddress);
 			
 		}
@@ -148,6 +174,7 @@ public class CoachService {
 			coachSportsMapping.setCoachCanVisit(coachSportsDetails.isCoachCanVisit());
 			coachSportsMapping.setQualification(coachSportsDetails.getQualification());
 			coachSportsMapping.setMaxPlayerPerGroup(coachSportsDetails.getMaxPlayerPerGroup());
+			coachSportsMapping.setSponsered(coachSportsDetails.isSponsered());
 			Set<Club> clubs = new HashSet<Club>(); 
 			for ( Integer id : coachSportsDetails.getClubIds()) {
 				clubs.add(clubManager.getClubById(id));

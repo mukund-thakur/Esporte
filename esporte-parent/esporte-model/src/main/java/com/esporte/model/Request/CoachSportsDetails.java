@@ -25,5 +25,7 @@ public class CoachSportsDetails {
 	
 	private boolean coachCanVisit;
 	
+	private boolean sponsered;
+	
 	private List<Integer> clubIds;
 }

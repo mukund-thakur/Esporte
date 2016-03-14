@@ -16,6 +16,9 @@ import lombok.Setter;
 public class AddressRequest {
 	
 	@JsonProperty
+	private long id;
+	
+	@JsonProperty
 	private String country;
 	
 	@JsonProperty
