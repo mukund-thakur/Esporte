@@ -22,6 +22,7 @@ import com.esporte.model.Request.AddressRequest;
 import com.esporte.model.Request.SportDetailsRequest;
 import com.esporte.model.Request.UserRegisterRequest;
 import com.esporte.model.Request.UserSearchRequest;
+import com.esporte.model.Request.UserSinginRequest;
 import com.esporte.model.Request.UserUpdateRequest;
 import com.esporte.model.sport.Sport;
 import com.esporte.model.user.Email;
@@ -90,6 +91,23 @@ public class UserService {
 		allPhoneDetails.add(phoneDetails);
 		user.setPhoneDetails(allPhoneDetails);
 		return userManager.create(user);
+	}
+	
+	public User signin(UserSinginRequest userSigninRequest) throws UserNotFoundException, PassWordNotMatchingException {
+		User userByEmail = userManager.getUserByEmail(userSigninRequest.getUserName());
+		User user = userByEmail;
+		User userByUserName = userManager.getUserByName(userSigninRequest.getUserName());
+		if(user == null) {
+			user = userByUserName;
+		}
+		if(user == null) {
+			throw new UserNotFoundException(userSigninRequest.getUserName());
+		}
+		
+		if(user.getPassword() != null && !user.getPassword().equals(userSigninRequest.getPassword())) {
+			throw new PassWordNotMatchingException(userSigninRequest.getUserName());
+		}
+		return user;
 	}
 
 	public User getUserByName(String userName) {

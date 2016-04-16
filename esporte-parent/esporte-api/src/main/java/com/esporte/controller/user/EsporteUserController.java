@@ -69,6 +69,7 @@ public class EsporteUserController {
 		   
 	   }
 	   
+
 	   @RequestMapping(value = "/update" , method=RequestMethod.PUT,produces = "application/json" , consumes = "application/json")
 	   @ResponseBody
 	   public User updateUserDetails(@RequestBody UserUpdateRequest userUpdateRequest) {
