@@ -231,7 +231,11 @@ public class UserManager {
 		Criteria sportCriteria = sportMappingCriteria.createCriteria("sport");
 		sportCriteria.add(Restrictions.eq("name", sportName));
 		}
-		List<User> users = criteria.list();
-		return users;
+		List<Long> users = criteria.list();
+		List<User> allUsers = new ArrayList<User>();
+		for(Long user:users) {
+			allUsers.add(getUserById(user));
+		}
+		return allUsers;
 	}
 }
