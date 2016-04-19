@@ -13,9 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import org.codehaus.groovy.reflection.handlegen;
-
 import com.esporte.model.Base.BaseData;
 import com.esporte.model.Request.CoachReviewRatingRequest;
 import com.esporte.model.coach.CoachAvailability;
@@ -37,7 +34,6 @@ public class CoachSportsMapping extends BaseData{
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "sports_id")
 	private Sport sport;

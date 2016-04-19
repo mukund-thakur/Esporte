@@ -2,7 +2,6 @@ package com.esporte.controller.signon;
 
 import javax.jws.soap.SOAPBinding.Use;
 
-import org.apache.commons.httpclient.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

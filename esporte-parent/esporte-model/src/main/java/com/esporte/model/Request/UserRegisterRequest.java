@@ -2,8 +2,6 @@ package com.esporte.model.Request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import scala.util.parsing.combinator.testing.Str;
-
 public class UserRegisterRequest {
 	
 	@JsonProperty

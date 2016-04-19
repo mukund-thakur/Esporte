@@ -19,8 +19,6 @@ import com.esporte.model.user.CoachSportsMapping;
 import com.esporte.model.user.PlayerSportMapping;
 import com.esporte.model.user.User;
 
-import scala.annotation.elidable;
-
 @Component
 @Transactional(propagation = Propagation.REQUIRED)
 public class CoachSportsMappingManager {

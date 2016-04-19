@@ -20,7 +20,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.rubyeye.xmemcached.CASOperation;
 
 @Getter
 @Setter
@@ -35,7 +34,6 @@ public class CoachInterestMapping extends BaseData{
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@JsonIgnore	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "interest_id")
 	private UserInterest interest;

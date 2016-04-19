@@ -42,9 +42,6 @@ import com.esporte.model.user.CoachInterestMapping;
 import com.esporte.model.user.CoachSportsMapping;
 import com.esporte.model.user.PlayerSportMapping;
 import com.esporte.model.user.User;
-
-import scala.annotation.cloneable;
-
 @Component
 public class CoachService {
 	

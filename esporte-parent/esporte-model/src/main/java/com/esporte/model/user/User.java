@@ -36,8 +36,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.*;
-import scala.util.parsing.combinator.testing.Str;;
-
 @Entity
 @Table(name="user")
 @AllArgsConstructor

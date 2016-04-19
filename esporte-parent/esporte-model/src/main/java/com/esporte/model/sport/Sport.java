@@ -17,7 +17,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
-import org.neo4j.cypher.internal.commands.True;
 
 import com.esporte.model.user.CoachSportsMapping;
 import com.esporte.model.user.PlayerSportMapping;

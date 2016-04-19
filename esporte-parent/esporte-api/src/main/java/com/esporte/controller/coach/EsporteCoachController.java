@@ -24,8 +24,6 @@ import com.esporte.model.coach.CoachBooking;
 import com.esporte.model.coach.CoachReviewRating;
 import com.esporte.model.user.User;
 
-import scala.languageFeature.reflectiveCalls;
-
 @Controller
 @RequestMapping(value = "/coach")
 public class EsporteCoachController {
