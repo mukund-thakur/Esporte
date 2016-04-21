@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esporte.bl.mapping.PlayerSportsMappingService;
 import com.esporte.bl.user.UserService;
+import com.esporte.model.Request.UserSearchRequest;
 import com.esporte.model.Request.UserUpdateRequest;
 import com.esporte.model.user.PlayerSportMapping;
 import com.esporte.model.user.User;
@@ -75,4 +76,9 @@ public class EsporteUserController {
 		   return userService.updatePlayerDetails(userUpdateRequest);
 	   }
 	   
+	   @RequestMapping(value= "/search", method=RequestMethod.POST,produces = "application/json" , consumes = "application/json")
+	   @ResponseBody
+	   public List<User> searchUser(@RequestBody UserSearchRequest userSearchRequest){
+		   return userService.searchUser(userSearchRequest);
+	   }
 }

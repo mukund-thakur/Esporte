@@ -1,5 +1,6 @@
 package com.esporte.bl.user;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import com.esporte.dal.user.UserManager;
 import com.esporte.model.Request.Address;
 import com.esporte.model.Request.SportDetails;
 import com.esporte.model.Request.UserRegisterRequest;
+import com.esporte.model.Request.UserSearchRequest;
 import com.esporte.model.Request.UserUpdateRequest;
 import com.esporte.model.sport.Sport;
 import com.esporte.model.user.Email;
@@ -100,61 +102,120 @@ public class UserService {
 	}
 
 	private void populatePlayerInterestDetails(UserUpdateRequest userUpdateRequest, User userToUpdate) {
+		if(userUpdateRequest.getInterestIds()!= null ){
 		Set<UserInterest> userInterests = new HashSet<UserInterest>();
 		for(long interestId :  userUpdateRequest.getInterestIds()) {
 			userInterests.add(interestManager.getInterestById(interestId));
 		}
 		userToUpdate.setUserInterests(userInterests);
+		
+		}
 	}
 
 	private void populatePlayerAddressDetails(UserUpdateRequest userUpdateRequest, User userToUpdate) {
+		
+		if(userUpdateRequest.getAddress() != null){
 		Set<UserAddress> userAddresses = new HashSet<UserAddress>();
+		
 		for (Address address : userUpdateRequest.getAddress()) {
 			UserAddress userAddress = new UserAddress();
-			userAddress.setCountry(address.getCountry());
+			
+			if(address.getCountry()!= null && !address.getCountry().isEmpty())
+				userAddress.setCountry(address.getCountry());
 			userAddress.setAddress(address.getAddress());
 			userAddress.setAddressType(address.getAddressType());
 			userAddress.setCity(address.getCity());
 			userAddress.setCoordinates(address.getCoordinates());
 			userAddress.setLandmark(address.getLandmark());
-			userAddress.setLocality(address.getLocality());
+			if(address.getLocality()!= null && !address.getLocality().isEmpty())
+				userAddress.setLocality(address.getLocality());
+			userAddress.setSubLocality(address.getSubLocality());
 			userAddress.setState(address.getState());
 			userAddress.setPin(address.getPin());
 			userAddresses.add(userAddress);
 			
 		}
 		userToUpdate.setUserAddresses(userAddresses);
+		}
 	}
 
 	private void populatePlayerSportsMapping(UserUpdateRequest userUpdateRequest,
 			User userToUpdate) {
+		if(userUpdateRequest.getSports() != null){
 		Set<PlayerSportMapping> playerSportMappings = new HashSet<PlayerSportMapping>();
 		for ( SportDetails sportDetails : userUpdateRequest.getSports() ) {
 			
 			PlayerSportMapping playerSportMapping = playerSportsMappingManager.getPlayerSportMappingByUserAndSportId(userToUpdate.getId(),sportDetails.getSportId());
+			
 			if ( playerSportMapping == null) {
 				playerSportMapping =  new PlayerSportMapping();
 			}
 			Sport sport = sportManager.getSportById(sportDetails.getSportId());
+			
 			playerSportMapping.setUser(userToUpdate);
+			
+			
 			playerSportMapping.setSport(sport);
-			playerSportMapping.setHasKit(sportDetails.getHasKit());
-			playerSportMapping.setHasExtraKit(sportDetails.getHasExtraKit());
+			
+			if(sportDetails.getHasKit()!= null)
+				playerSportMapping.setHasKit(sportDetails.getHasKit());
+			
+			if(sportDetails.getHasExtraKit()!= null)
+				playerSportMapping.setHasExtraKit(sportDetails.getHasExtraKit());
+			
+			if(sportDetails.getHasVenue()!= null)
 			playerSportMapping.setHasVenue(sportDetails.getHasVenue());
+			
+			if(sportDetails.getStartLevel()!= null && !sportDetails.getStartLevel().isEmpty())
+			playerSportMapping.setStartLevel(sportDetails.getStartLevel());
+			
+			
+			if(sportDetails.getRankingPoints()!= null)
+			playerSportMapping.setRankingPoints(sportDetails.getRankingPoints());
+			
+			if(sportDetails.getLevelPoints()!= null)
+			playerSportMapping.setLevelPoints(sportDetails.getLevelPoints());
+			
+			if(sportDetails.getCurrentLevel()!= null && !sportDetails.getCurrentLevel().isEmpty())
+			playerSportMapping.setCurrentLevel(sportDetails.getCurrentLevel());
+			
+			if(sportDetails.getSubLevel()!= null && !sportDetails.getSubLevel().isEmpty())
+			playerSportMapping.setSubLevel(sportDetails.getSubLevel());
+			
+			if(sportDetails.getRanking()!= null)
+			playerSportMapping.setRanking(sportDetails.getRanking());
+			
 			playerSportMappings.add(playerSportMapping);
 		}
 		userToUpdate.setPlayerSportMappings(playerSportMappings);
 	}
-
+	}
 	private void populateUserDetails(UserUpdateRequest userUpdateRequest, User userToUpdate) {
-		userToUpdate.setDob(userUpdateRequest.getDateOfBirth());
-		userToUpdate.setGender(userUpdateRequest.getSex().getValue());
+		if(userUpdateRequest.getDateOfBirth()!= null && !userUpdateRequest.getDateOfBirth().isEmpty()){
+			String dateString = userUpdateRequest.getDateOfBirth();
+			String [] dateArray = dateString.split("-");
+			int year = Integer.parseInt(dateArray[0])-1900;
+			int month = Integer.parseInt(dateArray[1])-1;
+			Date date = new Date(year, month, Integer.parseInt(dateArray[2]));
+			userToUpdate.setDob(date);
+			}
+		
+		//userToUpdate.setDob(userUpdateRequest.getDateOfBirth());
+		if(userUpdateRequest.getSex() != null)
+			userToUpdate.setGender(userUpdateRequest.getSex().getValue());
+		
+		if(userUpdateRequest.getUserType()!= null)
 		userToUpdate.setUserType(userUpdateRequest.getUserType());
+		if(userUpdateRequest.getUserName() != null && !userUpdateRequest.getUserName().equals(""))
 		userToUpdate.setUserName(userUpdateRequest.getUserName());
 	}
 
 	public User getUserById(long id) {
 		return userManager.getUserById(id);
+	}
+	
+	public List<User> searchUser(UserSearchRequest userSearchRequest) {
+		return userManager.userSearch(userSearchRequest);
 	}
 
 }

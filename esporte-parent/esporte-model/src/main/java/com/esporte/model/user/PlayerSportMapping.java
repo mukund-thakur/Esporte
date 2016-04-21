@@ -46,13 +46,16 @@ public class PlayerSportMapping extends BaseData{
 	private int hasExtraKit;
 	
 	@Column(name = "start_level")
-	private int startLevel;
+	private String startLevel;
 	
 	@Column(name = "current_level")
-	private int currentLevel;
+	private String currentLevel;
+	
+	@Column(name = "sub_level")
+	private String subLevel;
 	
 	@Column(name = "ranking")
-	private String ranking;
+	private int ranking;
 	
 	@Column(name = "total_credit")
 	private long totalCredit;
@@ -63,8 +66,124 @@ public class PlayerSportMapping extends BaseData{
 	@Column(name="credit_used")
 	private long creditUsed;
 	
-	@Column(name = "seeding")
-	private long seeding;
+	@Column(name= "ranking_points")
+	private double rankingPoints;
+	
+	@Column(name="level_points")
+	private double levelPoints;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Sport getSport() {
+		return sport;
+	}
+
+	public void setSport(Sport sport) {
+		this.sport = sport;
+	}
+
+	public int getHasVenue() {
+		return hasVenue;
+	}
+
+	public void setHasVenue(int hasVenue) {
+		this.hasVenue = hasVenue;
+	}
+
+	public int getHasKit() {
+		return hasKit;
+	}
+
+	public void setHasKit(int hasKit) {
+		this.hasKit = hasKit;
+	}
+
+	public int getHasExtraKit() {
+		return hasExtraKit;
+	}
+
+	public void setHasExtraKit(int hasExtraKit) {
+		this.hasExtraKit = hasExtraKit;
+	}
+
+	public String getStartLevel() {
+		return startLevel;
+	}
+
+	public void setStartLevel(String startLevel) {
+		this.startLevel = startLevel;
+	}
+
+	public String getCurrentLevel() {
+		return currentLevel;
+	}
+
+	public void setCurrentLevel(String currentLevel) {
+		this.currentLevel = currentLevel;
+	}
+
+	public String getSubLevel() {
+		return subLevel;
+	}
+
+	public void setSubLevel(String subLevel) {
+		this.subLevel = subLevel;
+	}
+
+	public int getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(int ranking) {
+		this.ranking = ranking;
+	}
+
+	public long getTotalCredit() {
+		return totalCredit;
+	}
+
+	public void setTotalCredit(long totalCredit) {
+		this.totalCredit = totalCredit;
+	}
+
+	public long getCreditRemaining() {
+		return creditRemaining;
+	
+	}
+
+	public void setCreditRemaining(long creditRemaining) {
+		this.creditRemaining = creditRemaining;
+	}
+
+	public long getCreditUsed() {
+		return creditUsed;
+	}
+
+	public void setCreditUsed(long creditUsed) {
+		this.creditUsed = creditUsed;
+	}
+
+	public double getRankingPoints() {
+		return rankingPoints;
+	}
+
+	public void setRankingPoints(double rankingPoints) {
+		this.rankingPoints = rankingPoints;
+	}
+
+	public double getLevelPoints() {
+		return levelPoints;
+	}
+
+	public void setLevelPoints(double levelPoints) {
+		this.levelPoints = levelPoints;
+	}
 
 	
 }

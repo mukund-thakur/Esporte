@@ -1,5 +1,6 @@
 package com.esporte.bl.mapping;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,7 +37,13 @@ public class PlayerSportsMappingService extends BaseData{
 	
 	public User updatePlayerDetails(UserUpdateRequest userSportMappingRequest) {
 		User  userToUpdate = userManager.getUserById(userSportMappingRequest.getUserId());
-		userToUpdate.setDob(userSportMappingRequest.getDateOfBirth());
+		String dateString = userSportMappingRequest.getDateOfBirth();
+		String [] dateArray = dateString.split("-");
+		int year = Integer.parseInt(dateArray[0])-1900;
+		int month = Integer.parseInt(dateArray[1])-1;
+		Date date = new Date(year, month, Integer.parseInt(dateArray[2]));
+		userToUpdate.setDob(date);
+		//userToUpdate.setDob(userSportMappingRequest.getDateOfBirth());
 		userToUpdate.setGender(userSportMappingRequest.getSex().getValue());
 		userToUpdate.setUserName(userSportMappingRequest.getUserName());
 		Set<PlayerSportMapping> playerSportMappings = new HashSet<PlayerSportMapping>();
@@ -48,6 +55,12 @@ public class PlayerSportsMappingService extends BaseData{
 			playerSportMapping.setHasKit(sportDetails.getHasKit());
 			playerSportMapping.setHasExtraKit(sportDetails.getHasExtraKit());
 			playerSportMapping.setHasVenue(sportDetails.getHasVenue());
+			playerSportMapping.setStartLevel(sportDetails.getStartLevel());
+			playerSportMapping.setRankingPoints(sportDetails.getRankingPoints());
+			playerSportMapping.setLevelPoints(sportDetails.getLevelPoints());
+			playerSportMapping.setCurrentLevel(sportDetails.getCurrentLevel());
+			playerSportMapping.setSubLevel(sportDetails.getSubLevel());
+			playerSportMapping.setRanking(sportDetails.getRanking());
 			playerSportMappings.add(playerSportMapping);
 		}
 		Set<UserAddress> userAddresses = new HashSet<UserAddress>();

@@ -45,4 +45,86 @@ public class Address {
 	@JsonProperty
 	@Enumerated(EnumType.STRING)
 	private AddressType addressType;
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getLocality() {
+		return locality;
+	}
+
+	public void setLocality(String locality) {
+		this.locality = locality;
+	}
+
+	public String getSubLocality() {
+		return subLocality;
+	}
+
+	public void setSubLocality(String subLocality) {
+		this.subLocality = subLocality;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public long getPin() {
+		return pin;
+	}
+
+	public void setPin(long pin) {
+		this.pin = pin;
+	}
+
+	public String getLandmark() {
+		return landmark;
+	}
+
+	public void setLandmark(String landmark) {
+		this.landmark = landmark;
+	}
+
+	public String getCoordinates() {
+		return coordinates;
+	}
+
+	public void setCoordinates(String coordinates) {
+		this.coordinates = coordinates;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public AddressType getAddressType() {
+		return addressType;
+	}
+
+	public void setAddressType(AddressType addressType) {
+		this.addressType = addressType;
+	}
+	
+	
 }
